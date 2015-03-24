@@ -2,18 +2,5 @@
 	Create a New Post
 	<hr/>
 </p>
-<div class="well">
-	<%= form_for @post do |f| %>
-
-		<%= f.label :title %>
-		<%= f.text_field :title %>
-
-		<%= f.label :url %>
-		<%= f.text_field :url %>
-
-		<%= f.label :description %>
-		<%= f.text_area :description, rows: 5 %>
-		<br/>
-		<%= f.submit  class: "btn btn-default" %>
-	<% end %>
-</div>
+<%=render 'shared/post_form' %>
+	

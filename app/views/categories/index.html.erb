@@ -1,0 +1,7 @@
+<%= render 'shared/content_title', title: "All Categories" %>
+
+<% @categories.each do |category| %>
+	<p><%= category.name %></p>
+<%end%>
+
+<%= link_to 'Add Cateogry', new_category_path, class: 'btn btn-success' %>

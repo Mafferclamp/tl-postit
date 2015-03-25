@@ -1,11 +1,11 @@
-<%= render 'shared/content_title', title: "All Posts" %>
+<%= render 'shared/content_title', title: "Post Category: #{@categories.name}"%>
 
-<% @posts.each do |post| %>
+<%= @categories.posts.each do |post| %>
 	<div class="row">
 		<div class="span8 ">
 			<p ><%= link_to post.title, post.url %> 
 				<%= render post.categories %>
-			<p> <%= post.description %></p>
+			<p> <%= post.description %>
 			<p>
 				<span class="quiet">posted by </span><%=post.user.username %>
 				<small><%= post.created_at %></small>
@@ -16,4 +16,4 @@
 			<hr/>
 		</div>
 	</div>
-<%end%>
+<% end %>

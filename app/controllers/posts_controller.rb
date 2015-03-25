@@ -38,7 +38,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:notice] = "This post was updated"
+      flash[:notice] = '"'+"#{@post.title}"+'"'+" was updated"
     else 
       render :edit
     end 

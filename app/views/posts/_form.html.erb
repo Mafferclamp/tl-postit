@@ -16,15 +16,15 @@
 		</div>
 		<div class="error span4">
 			<% if @post.errors.any? %>
-			<div class='alert alert-error span4'>
-				<h5>Please fix the following errors:</h5>
-					<ul>
-						<% @post.errors.full_messages.each do |msg| %>
-						<li><%= msg %></li>
-						<%end%>
-					</ul>
-			</div>
-	<% end %>
+				<div class='alert alert-error span4'>
+					<h5>Please fix the following errors:</h5>
+						<ul>
+							<% @post.errors.full_messages.each do |msg| %>
+								<li><%= msg %></li>
+							<%end%>
+						</ul>
+				</div>
+			<% end %>
 		</div>
 	</div>
 </div>

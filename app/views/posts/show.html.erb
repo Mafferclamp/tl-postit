@@ -4,7 +4,27 @@
 <%= render 'shared/content_title', title: @post.title %>
 <p><%= @post.title%></p>
 <p><%= @post.description %></p>
-<p><%= link_to @post.url%></p>
-<hr/>
+<p><%= link_to @post.url, ''%></p>
 
+
+ <%= form_for [@post, @comments] do |f| %>
+  <%= render 'shared/error', obj: @comments %>
+ 	<br/>
+ 	<div class="control-group">
+ 	<%= f.label :body, "Leave a Comment" %>
+ 	<%= f.text_area :body, row: 3, class: 'span4' %>
+ 	<br/>
+ 	</div>
+ 	<%= f.submit class: "btn btn-primary" %>
+ <% end %>
  
+ <%= render 'shared/content_title', title: "Comments:" %>
+
+ <% @post.comments.each do |comment| %>
+ 	<div class="well">
+ 		<em><%= comment.body %> </em>
+ 		<br/>
+ 		<span class="quiet">by </span><%=comment.user.username %>
+		<small><%= fix_date(comment.created_at) %></small>
+ 	</div>
+ <% end %>

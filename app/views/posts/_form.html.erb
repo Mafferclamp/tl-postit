@@ -1,5 +1,5 @@
 	<div class="well row">
-		<div class="form span4">
+		<div class="form span8">
 			<%= form_for @post do |f| %>
 
 				<%= f.label :title %>
@@ -10,21 +10,21 @@
 
 				<%= f.label :description %>
 				<%= f.text_area :description, rows: 5 %>
+
+				<br/>
+				<%= f.collection_select(:categories, Category.all, :id, :name) %>
+				<select multiple="multiple" name="categories[]">
+					<% @categories.each do |cat| %>
+						<option value="<%=cat.id%>"><%= cat.name %></option>
+					<% end %>
+				</select>
 				<br/>
 				<%= f.submit  class: "btn btn-default" %>
 			<% end %>
 		</div>
-		<div class="error span4">
-			<% if @post.errors.any? %>
-				<div class='alert alert-error span4'>
-					<h5>Please fix the following errors:</h5>
-						<ul>
-							<% @post.errors.full_messages.each do |msg| %>
-								<li><%= msg %></li>
-							<%end%>
-						</ul>
-				</div>
-			<% end %>
-		</div>
+			<%= render 'shared/error', obj: @post %>
 	</div>
+		
+
+
 </div>

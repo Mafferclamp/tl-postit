@@ -9,16 +9,5 @@
 			<%= f.submit class: "btn btn-success" %>
 		<%end %>
 	</div>
-	<div class="error span4">
-		<% if @categories.errors.any? %>
-			<div class="alert alert-error span4">
-			<h5>Please fix the following errors:</h5>
-				<ul>
-					<% @categories.errors.full_messages.each do |msg| %>
-							<li><%= msg %></li>
-					<% end %>		
-				</ul>
-			</div>
-		<%end %>
-	</div>
+		<%= render 'shared/error', obj: @categories %>
 </div>

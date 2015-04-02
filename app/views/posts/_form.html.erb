@@ -12,7 +12,7 @@
 				<%= f.text_area :description, rows: 5 %>
 
 				<br/>
-					<%= f.collection_check_boxes(:categories, Category.all, :id, :name) do |cb|%>
+					<%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |cb|%>
 						<% cb.label(class: "checkbox inline") {cb.check_box(class: "checkbox") + cb.text} %>
 					<% end %>
 				<br/>

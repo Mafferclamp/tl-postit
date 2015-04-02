@@ -22,11 +22,10 @@ class PostsController < ApplicationController
 
   def new
   	@post = Post.new
-    @categories = Category.all
   end
 
   def create
-    
+
   	@post = Post.new(post_params)
   	@post.user = User.first # TODO: Change once we have authentication is created 
 

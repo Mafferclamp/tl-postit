@@ -26,6 +26,7 @@ class PostsController < ApplicationController
   end
 
   def create
+    
   	@post = Post.new(post_params)
   	@post.user = User.first # TODO: Change once we have authentication is created 
 
@@ -42,6 +43,7 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       flash[:notice] = '"'+"#{@post.title}"+'"'+" was updated"
+      redirect_to posts_path
     else 
       render :edit
     end 
@@ -50,7 +52,7 @@ class PostsController < ApplicationController
   private 
 
   def post_params
-  	params.require(:post).permit(:title, :url, :description)
+  	params.require(:post).permit! #(:title, :url, :description, category_ids: [])
   end
 
   def set_post

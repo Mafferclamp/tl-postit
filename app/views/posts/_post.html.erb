@@ -2,6 +2,7 @@
 		<div class="span8 ">
 			<p ><%= link_to post.title, fix_url(post.url) %> 
 				<%= render post.categories %>
+				<%= link_to 'Edit', edit_post_path(post), class: "pull-right" %>
 			<p> <%= post.description %>
 			<p>
 				<span class="quiet">posted by </span><%=post.user.username %>

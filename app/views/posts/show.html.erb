@@ -6,7 +6,7 @@
 <p><%= @post.description %></p>
 <p><%= link_to @post.url, ''%></p>
 
-
+<% if logged_in? %>
  <%= form_for [@post, @comments] do |f| %>
   <%= render 'shared/error', obj: @comments %>
  	<br/>
@@ -17,7 +17,7 @@
  	</div>
  	<%= f.submit class: "btn btn-primary" %>
  <% end %>
- 
+<% end %>
  <%= render 'shared/content_title', title: "Comments:" %>
 
  <% @post.comments.each do |comment| %>

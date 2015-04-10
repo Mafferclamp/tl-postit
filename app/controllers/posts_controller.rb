@@ -28,7 +28,7 @@ class PostsController < ApplicationController
   def create
 
   	@post = Post.new(post_params)
-  	@post.user = @current_user # TODO: Change once we have authentication is created 
+  	@post.user = User.find(session[:user_id]) # TODO: Change once we have authentication is created 
 
   	if  @post.save
   		flash[:notice] = "Your post was created."

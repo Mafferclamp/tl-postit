@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
 	def show
 		@post = Post.where(user_id: session[:user_id])
+		@comments = Comment.where(user_id: session[:user_id])
 	end
 
 

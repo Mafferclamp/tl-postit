@@ -1,22 +1,41 @@
 <%= render 'shared/content_title', title: "Your account " %>
 
-<% @post.each do |post| %>
-		<div class="row">
-		<div class="span8 ">
-			<p ><%= link_to post.title, fix_url(post.url) %> 
-				<%= render post.categories %>
-				<% if logged_in? %>
-				<%= link_to 'Edit', edit_post_path(post), class: "pull-right" %>
-				<% end %>
-			<p> <%= post.description %>
-			<p>
-				<span class="quiet">posted by </span><%=post.user.username %>
-				<small><%= fix_date(post.created_at) %></small>
-			</p>
-			<small>
-				<%= link_to("#{post.comments.size} comments", post_path(post)) %>
-			</small>
-			<hr/>
-		</div>
-	</div>
-<%end%>
+<div class="well">
+	<p> Username: <%= current_user.username %></p>
+	<p> Created at: <%= current_user.created_at %></p>
+	<p> Number of posts: <%= @post.count %></p>
+	<p> Number of comments: <%= @comments.count %> </p>
+
+</div>
+
+<ul class="nav nav-tabs" id="myTab">
+  <li><a href="#posts" data-toggle="tab">Posts</a></li>
+  <li><a href="#comments" data-toggle="tab">Comments</a></li>
+</ul>
+
+
+<div class="tab_content">
+	<div class="tab-pane active" id="posts">
+		<% @post.each do |post| %>
+			<%= render 'posts/post', post: post %>
+		<%end%>
+	</div>	
+	<div class="tab-pane" id="comments">
+	 <% @comments.each do |comment| %>
+	 	<div class="well">
+	 		<em><%= comment.body %> </em>
+	 		<br/>
+	 		<span class="quiet">by </span><%=comment.user.username %>
+			<small><%= fix_date(comment.created_at) %></small>
+	 	</div>
+	 <% end %>
+	</div>	
+</div>
+
+
+
+<script>
+  $(function () {
+    $('#myTab a:first').tab('show');
+  })
+</script>

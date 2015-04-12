@@ -21,10 +21,5 @@
  <%= render 'shared/content_title', title: "Comments:" %>
 
  <% @post.comments.each do |comment| %>
- 	<div class="well">
- 		<em><%= comment.body %> </em>
- 		<br/>
- 		<span class="quiet">by </span><%=comment.user.username %>
-		<small><%= fix_date(comment.created_at) %></small>
- 	</div>
+ 	<%= render 'comments/comments', comment: comment %>
  <% end %>

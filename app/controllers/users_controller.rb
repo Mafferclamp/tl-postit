@@ -3,6 +3,7 @@
      #     user GET    /users/:id(.:format)               users#show
 
 class UsersController < ApplicationController
+	before_action :set_user, only: [:show, :edit, :update]
 	def index
 	end
 
@@ -29,7 +30,6 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@user = User.find(params[:id])
 	end
 
 	def update
@@ -46,5 +46,9 @@ class UsersController < ApplicationController
 	
 	def user_params
 		params.require(:user).permit(:username, :password)
+	end
+
+	def set_user
+		@user = User.find(params[:id])
 	end
 end

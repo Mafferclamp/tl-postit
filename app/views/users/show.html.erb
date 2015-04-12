@@ -1,41 +1,39 @@
-<%= render 'shared/content_title', title: "Your account " %>
+<%= render 'shared/content_title', title: "#{current_user.username}'s account " %>
 
 <div class="well">
-	<p> Username: <%= current_user.username %></p>
-	<p> Created at: <%= current_user.created_at %></p>
-	<p> Number of posts: <%= @post.count %></p>
-	<p> Number of comments: <%= @comments.count %> </p>
-
+	<dl class="dl-horizontal">
+		<dt>Username:</dt>
+		<dd><%= current_user.username %></dd>
+		<dt>Account Created At:</dt>
+		<dd><%= fix_date(current_user.created_at) %></dd>
+		<dt>Number of Posts:</dt>
+		<dd><%= @post.count %></dd>
+		<dt>Number of Comments:</dt>
+		<dd><%= @comments.count %></dd>
+	</dl>
 </div>
 
-<ul class="nav nav-tabs" id="myTab">
-  <li><a href="#posts" data-toggle="tab">Posts</a></li>
-  <li><a href="#comments" data-toggle="tab">Comments</a></li>
+<%= render 'shared/content_title', title: "#{current_user.username}'s activity" %>
+
+<ul class="nav nav-tabs">
+	<li class='<%= 'active' if params[:tab].nil? || params[:tab] == 'posts' %>'>
+		<%= link_to "Posts (#{@post.count})", user_path(@user, tab: 'posts')%>
+	</li>
+	<li class='<%='active' if params[:tab] == 'comments' %>'>
+		<%= link_to "Comments (#{@comments.count})", user_path(@user, tab: 'comments')%>
+	</li>
 </ul>
 
-
-<div class="tab_content">
-	<div class="tab-pane active" id="posts">
-		<% @post.each do |post| %>
-			<%= render 'posts/post', post: post %>
-		<%end%>
-	</div>	
-	<div class="tab-pane" id="comments">
-	 <% @comments.each do |comment| %>
-	 	<div class="well">
-	 		<em><%= comment.body %> </em>
-	 		<br/>
-	 		<span class="quiet">by </span><%=comment.user.username %>
-			<small><%= fix_date(comment.created_at) %></small>
-	 	</div>
-	 <% end %>
-	</div>	
-</div>
+<% if params[:tab].nil? || params[:tab] == 'posts' %>
+	<% @post.each do |post| %>
+		<%= render 'posts/post', post: post %>
+	<%end%>
+<% elsif params[:tab] == 'comments' %>
+	<% @comments.each do |comment| %>
+		<%= render 'comments/comments', comment: comment %>
+	<% end %>
+<% end %>
 
 
 
-<script>
-  $(function () {
-    $('#myTab a:first').tab('show');
-  })
-</script>
+

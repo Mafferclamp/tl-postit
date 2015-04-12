@@ -35,25 +35,30 @@
 </div>
 <!-- Will appear if you are logged in -->
 <% if logged_in? %>
-	<div class="nav_item ">
-		<%= link_to(logout_path) do %>
-			<button class="btn btn-default">
-				<i class="icon-user"></i>
+	<div class="btn-group nav_item ">
+		<%= link_to "#", class: 'btn dropdown-toggle', 'data-toggle' => 'dropdown' do %>
+			<i class="icon-user"></i>
+			<%= current_user.username %>
+			<span class="caret"></span>
+			<% end %>
+			<ul class="dropdown-menu">
+				<li><%= link_to(user_path(session[:user_id])) do %>
+					<i class="icon-user"></i>
+					My Account
+					<%end %>
+				</li>
+				<li><%= link_to(edit_user_path(session[:user_id])) do %>
+					<i class="icon-pencil"></i>
+					Edit User
+					<%end %>
+				</li>
+				<li><%= link_to(logout_path) do %>
+					<i class="icon-circle-arrow-right"></i>
 					Logout
-			</button>
-		<%end %>
+					<%end%>
+				</li>
+			</ul>
 	</div>
-		<div class="btn-group nav_item ">
-			<%= link_to "#", class: 'btn dropdown-toggle', 'data-toggle' => 'dropdown' do %>
-				<i class="icon-user"></i>
-				<%= current_user.username %>
-				<span class="caret"></span>
-				<% end %>
-				<ul class="dropdown-menu">
-					<li><%= link_to "My Account", user_path(session[:user_id]) %></li>
-					<li><%= link_to "Edit", edit_user_path(session[:user_id]) %></li>
-				</ul>
-		</div>
 
 
 <!-- Will appear if you are not logged in -->	

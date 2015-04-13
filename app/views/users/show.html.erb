@@ -1,11 +1,11 @@
-<%= render 'shared/content_title', title: "#{current_user.username}'s account " %>
+<%= render 'shared/content_title', title: "#{@user.username}'s account " %>
 
 <div class="well">
 	<dl class="dl-horizontal">
 		<dt>Username:</dt>
-		<dd><%= current_user.username %></dd>
+		<dd><%= @user.username %></dd>
 		<dt>Account Created At:</dt>
-		<dd><%= fix_date(current_user.created_at) %></dd>
+		<dd><%= fix_date(@user.created_at) %></dd>
 		<dt>Number of Posts:</dt>
 		<dd><%= @post.count %></dd>
 		<dt>Number of Comments:</dt>
@@ -13,7 +13,7 @@
 	</dl>
 </div>
 
-<%= render 'shared/content_title', title: "#{current_user.username}'s activity" %>
+<%= render 'shared/content_title', title: "#{@user.username}'s activity" %>
 
 <ul class="nav nav-tabs">
 	<li class='<%= 'active' if params[:tab].nil? || params[:tab] == 'posts' %>'>
@@ -30,7 +30,7 @@
 	<%end%>
 <% elsif params[:tab] == 'comments' %>
 	<% @comments.each do |comment| %>
-		<%= render 'comments/comments', comment: comment %>
+		<%= render 'comments/comments', comment: comment, show_post: true %>
 	<% end %>
 <% end %>
 

@@ -4,12 +4,13 @@
 
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update]
+	before_action :require_same_user, only: [:edit, :update]
 	def index
 	end
 
 	def show
-		@post = Post.where(user_id: session[:user_id])
-		@comments = Comment.where(user_id: session[:user_id])
+		@post = Post.where(user_id: @user.id)
+		@comments = Comment.where(user_id: @user.id)
 	end
 
 
@@ -50,5 +51,12 @@ class UsersController < ApplicationController
 
 	def set_user
 		@user = User.find(params[:id])
+	end
+
+	def require_same_user
+		if current_user != @user 
+			flash[:error] = "You don't have permission to do that"
+			redirect_to root_path
+		end
 	end
 end

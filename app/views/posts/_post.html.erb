@@ -7,7 +7,7 @@
 				<% end %>
 			<p> <%= post.description %>
 			<p>
-				<span class="quiet">posted by </span><%= post.user.username %>
+				<span class="quiet">posted by </span><%= link_to post.user.username, user_path(post.user.id) %>
 				<small><%= fix_date(post.created_at) %></small>
 			</p>
 			<small>

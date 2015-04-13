@@ -1,9 +1,12 @@
-
-	 	<div class="well">
-	 		<em><%= comment.body %> </em>
-	 		<br/>
-	 		<span class="quiet">by </span><%=comment.user.username %>
-			<small><%= fix_date(comment.created_at) %></small>
-	 	</div>
+<% show_post ||= false %>
+ 	<div class="well">
+ 		<em><%= comment.body %> </em>
+ 		<% if show_post %>
+ 			on <%= link_to comment.post.title, post_path(comment.post) %>
+ 		<% end %>
+ 		<br/>
+ 		<span class="quiet">by </span><%=link_to comment.user.username, user_path(comment.user) %>
+		<small><%= fix_date(comment.created_at) %></small>
+ 	</div>
 
 	

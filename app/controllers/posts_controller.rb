@@ -10,11 +10,11 @@
 #               PUT    /posts/:id(.:format)                   posts#update
 
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:show, :index]
 
   def index
-  	@post = Post.all
+  	@post = Post.all.sort_by{|x| x.vote_total}.reverse
   end
 
   def show
@@ -49,6 +49,18 @@ class PostsController < ApplicationController
     end 
   end 
 
+  def vote
+    @vote = Vote.create(voteable: @post, user_id: current_user.id, vote: params[:vote])
+
+    if @vote.valid? 
+      flash[:notice] = "Your vote has been counted"
+
+    else
+      flash[:error] = "You can only vote once"
+    end
+    redirect_to posts_path
+  end
+
   private 
 
   def post_params
@@ -58,5 +70,6 @@ class PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
   end
+
 
 end

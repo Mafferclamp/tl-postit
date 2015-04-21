@@ -5,7 +5,7 @@
 			<i class="icon-arrow-up"></i>
 		<%end%>
 		<br/>
-		<%=  @comments.vote_total %>
+		<%=  comment.vote_total %>
 		<br/>
 		<%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post' do %>
 			<i class="icon-arrow-down"></i>

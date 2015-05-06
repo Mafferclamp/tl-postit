@@ -1,5 +1,6 @@
 <% show_post ||= false %>
 <div class="row">
+<% if logged_in? %>
  	<div class="span0 text-center well	">
 		<%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post' do %>
 			<i class="icon-arrow-up"></i>
@@ -11,6 +12,12 @@
 			<i class="icon-arrow-down"></i>
 		<%end%>
 	</div>
+<%elsif %>
+  <div class="span0 text-center well  ">
+      <%= comment.vote_total %>
+      <%= "votes" %>
+    </div>
+<%end%>
  	<div class="well span9">
  		<em><%= comment.body %> </em>
  		<% if show_post %>
